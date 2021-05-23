@@ -29,7 +29,8 @@ class LoadingPage extends StatelessWidget {
 
     await Future.delayed(Duration(milliseconds: 1000));
 
-    Navigator.pushReplacement(context, navegarMapaFadeIn(context, AccesoGpsPage()));
+    print('Loading Page Hola Mundo!!!');
+    // Navigator.pushReplacement(context, navegarMapaFadeIn(context, AccesoGpsPage()));
     // Navigator.pushReplacement(context, navegarMapaFadeIn(context, MapaPage()));
 
 
