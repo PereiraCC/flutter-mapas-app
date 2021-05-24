@@ -20,7 +20,7 @@ class MiUbicacionBloc extends Bloc<MiUbicacionEvent, MiUbicacionState> {
       desiredAccuracy: LocationAccuracy.high,
       distanceFilter: 10
     ).listen((Position position) {
-      print(position);
+      add(OnUbicacionCambio(new LatLng(position.latitude, position.longitude)));
     });
 
   }
@@ -31,6 +31,14 @@ class MiUbicacionBloc extends Bloc<MiUbicacionEvent, MiUbicacionState> {
 
   @override
   Stream<MiUbicacionState> mapEventToState(MiUbicacionEvent event) async* {
-    // TODO: implement mapEventToState
+    
+    if( event is OnUbicacionCambio ) {
+      yield state.copyWith(
+        existeUbicacion: true,
+        ubicacion: event.ubicacion
+      );
+
+    }
+
   }
 }
