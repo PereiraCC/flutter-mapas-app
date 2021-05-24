@@ -15,7 +15,14 @@ class MapaBloc extends Bloc<MapaEvent, MapaState> {
 
   MapaBloc() : super(MapaState());
 
+  //Controladro del mapa
   GoogleMapController _mapController;
+
+  // Polylines
+  Polyline _miRuta = new Polyline(
+    polylineId: PolylineId('mi_ruta'),
+    width: 4
+  );
 
   void initMapa(GoogleMapController controller) {
 
@@ -41,7 +48,15 @@ class MapaBloc extends Bloc<MapaEvent, MapaState> {
     if( event is OnMapaListo) {
       yield state.copyWith(mapaListo: true);
     } else if( event is OnLocationUpdate) {
-      print(event.ubicacion);
+     
+      List<LatLng> points = [ ...this._miRuta.points, event.ubicacion];
+      this._miRuta = this._miRuta.copyWith(pointsParam: points);
+
+      final currentPolylines = state.polylines;
+      currentPolylines['mi_ruta'] = this._miRuta;
+
+      yield state.copyWith(polylines: currentPolylines);
+
     }
 
   }

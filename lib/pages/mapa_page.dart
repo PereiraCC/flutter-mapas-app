@@ -75,6 +75,7 @@ class _CrearMapa extends StatelessWidget {
       myLocationButtonEnabled: false,
       zoomControlsEnabled: false,
       onMapCreated: mapaBloc.initMapa,
+      polylines: mapaBloc.state.polylines.values.toSet(),
     );
 
 
