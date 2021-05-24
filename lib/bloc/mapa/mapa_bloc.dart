@@ -55,11 +55,18 @@ class MapaBloc extends Bloc<MapaEvent, MapaState> {
     } else if(event is OnMarcarRecorrido) {
       yield* this._onMarcarRecorrido(event);
 
+    } else if(event is OnSeguirUbicacion) {
+      yield* this._onSeguirUbicacion(event);
+     
     }
 
   }
 
   Stream<MapaState> _onLocationUpdate(OnLocationUpdate event ) async*{
+
+    if(state.seguirUbicacion){
+      this.moverCamara(event.ubicacion);
+    }
 
     final points = [ ...this._miRuta.points, event.ubicacion];
     this._miRuta = this._miRuta.copyWith(pointsParam: points);
@@ -86,6 +93,16 @@ class MapaBloc extends Bloc<MapaEvent, MapaState> {
       dibujarRecorrido: !state.dibujarRecorrido,
       polylines: currentPolylines
     );
+
+  }
+
+  Stream<MapaState> _onSeguirUbicacion(OnSeguirUbicacion event) async*{
+
+     if( !state.seguirUbicacion ) {
+        this.moverCamara( this._miRuta.points[ this._miRuta.points.length -1 ]);
+      }
+
+      yield state.copyWith(seguirUbicacion: !state.seguirUbicacion);
 
   }
 

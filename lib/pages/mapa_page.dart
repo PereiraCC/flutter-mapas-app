@@ -41,6 +41,8 @@ class _MapaPageState extends State<MapaPage> {
 
           BtnUbicacion(),
 
+          BtnSeguirUbicacion(),
+
           BtnMiRuta(),
 
         ],
