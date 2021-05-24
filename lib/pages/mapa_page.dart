@@ -62,6 +62,8 @@ class _CrearMapa extends StatelessWidget {
 
     final mapaBloc = BlocProvider.of<MapaBloc>(context);
 
+    mapaBloc.add(OnLocationUpdate(state.ubicacion));
+
     final cameraPosition = new CameraPosition(
       target: state.ubicacion,
       zoom: 15

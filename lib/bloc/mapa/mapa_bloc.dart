@@ -40,6 +40,8 @@ class MapaBloc extends Bloc<MapaEvent, MapaState> {
   
     if( event is OnMapaListo) {
       yield state.copyWith(mapaListo: true);
+    } else if( event is OnLocationUpdate) {
+      print(event.ubicacion);
     }
 
   }
