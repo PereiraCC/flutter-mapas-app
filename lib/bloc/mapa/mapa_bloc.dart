@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:mapas_app/pages/mapa_page.dart';
+import 'package:mapas_app/themes/uber_map_theme.dart';
 import 'package:meta/meta.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -17,14 +19,12 @@ class MapaBloc extends Bloc<MapaEvent, MapaState> {
 
   void initMapa(GoogleMapController controller) {
 
-    if( state.mapaListo) {
+    if( !state.mapaListo) {
       this._mapController = controller;
+      this._mapController.setMapStyle(jsonEncode(uberMapTheme));
+
+      add(OnMapaListo());
     }
-
-    //TODO: Cambiar estilo mapa
-
-    add(OnMapaListo());
-
   }
 
 
