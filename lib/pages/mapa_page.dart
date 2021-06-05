@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mapas_app/bloc/mapa/mapa_bloc.dart';
 import 'package:mapas_app/bloc/mi_ubicacion/mi_ubicacion_bloc.dart';
@@ -31,8 +32,19 @@ class _MapaPageState extends State<MapaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<MiUbicacionBloc, MiUbicacionState>(
-        builder: ( _ , state) => _CrearMapa(state: state)
+      body: Stack(
+        children: [
+
+          BlocBuilder<MiUbicacionBloc, MiUbicacionState>(
+            builder: ( _ , state) => _CrearMapa(state: state)
+          ),
+
+          Positioned(
+            top: 15,
+            child: SearchBar()
+          ),
+
+        ],
       ),
 
       floatingActionButton: Column( 
