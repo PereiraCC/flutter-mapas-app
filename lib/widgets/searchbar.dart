@@ -10,7 +10,10 @@ class SearchBar extends StatelessWidget {
         if(state.seleccionManual) {
           return Container();
         } else {
-          return buildSearchnar(context);
+          return FadeInDown(
+            duration: Duration(milliseconds: 300),
+            child: buildSearchnar(context)
+          );
         }
 
       },
