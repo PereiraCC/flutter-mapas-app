@@ -74,7 +74,7 @@ class _BuildMarcadorManual extends StatelessWidget {
               elevation: 0,
               splashColor: Colors.transparent,
               onPressed: () {
-                // TODO: Confirmar destino!!!???
+                this.calcularDestino(context);
               }
             ),
           ),
@@ -83,4 +83,16 @@ class _BuildMarcadorManual extends StatelessWidget {
       ],
     );
   }
+
+  void calcularDestino(BuildContext context) {
+
+    final trafficService = new TrafficService();
+    final inicio = BlocProvider.of<MiUbicacionBloc>(context).state.ubicacion;
+    final destino = BlocProvider.of<MapaBloc>(context).state.ubicacionCentral;
+
+
+    trafficService.getCoordsInicioYDestino(inicio, destino);
+
+  }
+
 }
