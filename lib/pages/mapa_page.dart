@@ -40,10 +40,10 @@ class _MapaPageState extends State<MapaPage> {
           ),
 
           // TODO: Hacer el toggle cuando estoy manualmente
-          // Positioned(
-          //   top: 15,
-          //   child: SearchBar()
-          // ),
+          Positioned(
+            top: 15,
+            child: SearchBar()
+          ),
 
           MarcadorManual(),
 
