@@ -39,10 +39,13 @@ class _MapaPageState extends State<MapaPage> {
             builder: ( _ , state) => _CrearMapa(state: state)
           ),
 
-          Positioned(
-            top: 15,
-            child: SearchBar()
-          ),
+          // TODO: Hacer el toggle cuando estoy manualmente
+          // Positioned(
+          //   top: 15,
+          //   child: SearchBar()
+          // ),
+
+          MarcadorManual(),
 
         ],
       ),
