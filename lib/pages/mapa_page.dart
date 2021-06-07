@@ -88,18 +88,24 @@ class _CrearMapa extends StatelessWidget {
       zoom: 15
     );
 
-    return GoogleMap(
-      initialCameraPosition: cameraPosition,
-      myLocationEnabled: true,
-      myLocationButtonEnabled: false,
-      zoomControlsEnabled: false,
-      onMapCreated: mapaBloc.initMapa,
-      polylines: mapaBloc.state.polylines.values.toSet(),
-      onCameraMove: ( cameraPosition ) {
-        // cameraPosition.target = LatLng central del mapa
-        mapaBloc.add( OnMovioMapa( cameraPosition.target ));
+    return BlocBuilder<MapaBloc, MapaState>(
+      builder: (context, _) {
+        return GoogleMap(
+          initialCameraPosition: cameraPosition,
+          myLocationEnabled: true,
+          myLocationButtonEnabled: false,
+          zoomControlsEnabled: false,
+          onMapCreated: mapaBloc.initMapa,
+          polylines: mapaBloc.state.polylines.values.toSet(),
+          onCameraMove: ( cameraPosition ) {
+            // cameraPosition.target = LatLng central del mapa
+            mapaBloc.add( OnMovioMapa( cameraPosition.target ));
+          },
+        );
       },
     );
+
+    
 
 
   }
