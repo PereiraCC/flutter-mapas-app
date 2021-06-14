@@ -44,16 +44,25 @@ class TrafficService {
   Future<SearchResponse> getResultadosPorQuery(String busqueda, LatLng proximidad) async{
 
     final url = '${ this._baseUrlGeo }/mapbox.places/$busqueda.json';
-    final resp = await this._ido.get(url, queryParameters: {
-      'access_token' :  this._apiKey,
-      'autocomplete' : 'true',
-      'proximity'    : '${ proximidad.longitude },${ proximidad.latitude }',
-      'language'     : 'es',
-    });
 
-    final searchResponse = searchResponseFromJson(resp.data);
+    try {
+      
+      final resp = await this._ido.get(url, queryParameters: {
+        'access_token' :  this._apiKey,
+        'autocomplete' : 'true',
+        'proximity'    : '${ proximidad.longitude },${ proximidad.latitude }',
+        'language'     : 'es',
+      });
 
-    return searchResponse;
+      final searchResponse = searchResponseFromJson(resp.data);
+
+      return searchResponse;
+
+    } catch (e) {
+      return SearchResponse(features: []);
+    }
+
+    
 
   }
 }
