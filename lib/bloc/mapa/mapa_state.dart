@@ -10,24 +10,30 @@ class MapaState {
 
   //Polylines
   final Map<String, Polyline> polylines;
+  final Map<String, Marker> markers;
 
   MapaState({
     this.mapaListo = false,
     this.dibujarRecorrido = false,
     this.seguirUbicacion = false,
     Map<String, Polyline> polylines,
+    Map<String, Marker> markers,
     this.ubicacionCentral
-  }) : this.polylines = polylines ?? new Map();
+  }) : this.polylines = polylines ?? new Map(),
+       this.markers = markers ?? new Map();
+       
 
   MapaState copyWith({
     bool mapaListo,
     bool dibujarRecorrido,
     bool seguirUbicacion,
     LatLng ubicacionCentral,
-    Map<String, Polyline> polylines
+    Map<String, Polyline> polylines,
+    Map<String, Marker> markers
   }) => new MapaState(
     mapaListo : mapaListo ?? this.mapaListo,
     polylines: polylines ?? this.polylines,
+    markers: markers ?? this.markers,
     seguirUbicacion  : seguirUbicacion ?? this.seguirUbicacion,
     dibujarRecorrido : dibujarRecorrido ?? this.dibujarRecorrido,
     ubicacionCentral : ubicacionCentral ?? this.ubicacionCentral
