@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart' show Colors;
+import 'package:flutter/material.dart' show Colors, Offset;
 import 'package:mapas_app/themes/uber_map_theme.dart';
 import 'package:meta/meta.dart';
 
@@ -128,7 +128,15 @@ class MapaBloc extends Bloc<MapaEvent, MapaState> {
     // Marcadores
     final markerInicio = new Marker(
       markerId: MarkerId('inicio'),
-      position: event.rutaCoordenadas[0]
+      position: event.rutaCoordenadas[0],
+      infoWindow: InfoWindow(  
+        title: 'Mi Casa',
+        snippet: 'Esta es el punto inicial de mi casa',
+        anchor: Offset(0.5,0),
+        onTap: () {
+          print('Info Window tap');
+        }
+      )
     );
 
     final markerFinal = new Marker(
