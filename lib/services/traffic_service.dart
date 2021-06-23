@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' show LatLng;
 import 'package:mapas_app/helpers/debouncer.dart';
+import 'package:mapas_app/models/reverse_query_response.dart';
 
 import 'package:mapas_app/models/search_response.dart';
 import 'package:mapas_app/models/trafiic-response.dart';
@@ -30,9 +31,6 @@ class TrafficService {
 
   Future<DrivingResponse> getCoordsInicioYDestino(LatLng inicio, LatLng destino) async {
 
-    print('Inicio: $inicio');
-    print('Destino: $destino');
-
     final coordString = '${inicio.longitude},${inicio.latitude};${destino.longitude},${destino.latitude}';
     final url = '${this._baseUrlDir}/mapbox/driving/$coordString';
 
@@ -51,8 +49,6 @@ class TrafficService {
   }
 
   Future<SearchResponse> getResultadosPorQuery(String busqueda, LatLng proximidad) async{
-
-    print('Buscando!!!!!!');
 
     final url = '${ this._baseUrlGeo }/mapbox.places/$busqueda.json';
 
@@ -89,4 +85,21 @@ class TrafficService {
     Future.delayed(Duration(milliseconds: 201)).then((_) => timer.cancel()); 
 
   }
+
+  Future<ReverseQueryResponse> getCoordenadasInfo( LatLng destinoCoords ) async {
+
+    final url = '${this._baseUrlGeo}/mapbox.places/${destinoCoords.longitude},${destinoCoords.latitude}.json';
+
+    final resp = await this._ido.get(url, queryParameters: {
+      'access_token' :  this._apiKey,
+      'language'     : 'es',
+    });
+
+    // final data = DrivingResponse.fromJson(resp.data);
+    final data = reverseQueryResponseFromJson(resp.data);
+
+    return data;
+  }
+
+
 }

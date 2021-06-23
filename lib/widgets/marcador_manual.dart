@@ -95,6 +95,9 @@ class _BuildMarcadorManual extends StatelessWidget {
     final inicio = BlocProvider.of<MiUbicacionBloc>(context).state.ubicacion;
     final destino = mapaBloc.state.ubicacionCentral;
 
+    // Obtener informacion del destino
+    trafficService.getCoordenadasInfo(destino);
+
     final trafficResponse =  await trafficService.getCoordsInicioYDestino(inicio, destino);
 
     final geometry = trafficResponse.routes[0].geometry;
