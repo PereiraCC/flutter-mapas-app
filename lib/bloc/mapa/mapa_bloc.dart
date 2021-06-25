@@ -154,8 +154,8 @@ class MapaBloc extends Bloc<MapaEvent, MapaState> {
 
     Future.delayed(Duration(milliseconds: 300)).then(
       (value) => {
-        _mapController.showMarkerInfoWindow(MarkerId('inicio'))
-        // _mapController.showMarkerInfoWindow(MarkerId('destino'));
+        // _mapController.showMarkerInfoWindow(MarkerId('inicio'))
+        _mapController.showMarkerInfoWindow(MarkerId('destino'))
       }
     );
 
