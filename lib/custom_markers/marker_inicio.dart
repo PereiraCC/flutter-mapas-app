@@ -27,6 +27,25 @@ class MarkerInicioPainter extends CustomPainter {
       circuloBlancoR,
       paint
     );
+
+    // Sombra
+    final path = new Path();
+
+    path.moveTo(40, 20);
+    path.lineTo(size.width - 10, 20);
+    path.lineTo(size.width - 10, 100);
+    path.lineTo(40, 100);
+
+    canvas.drawShadow(path, Colors.black87, 10, false);
+
+    //Caja Blanca
+    final cajaBlanca = Rect.fromLTWH(40, 20, size.width - 55, 80);
+    canvas.drawRect(cajaBlanca, paint);
+
+    //Caja Blanca
+    paint.color = Colors.black;
+    final cajaNegra = Rect.fromLTWH(40, 20, 70, 80);
+    canvas.drawRect(cajaNegra, paint);
   }
 
   @override
