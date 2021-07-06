@@ -64,9 +64,6 @@ class SearchBar extends StatelessWidget {
 
   Future retornoBusqueda(BuildContext context, SearchResult result) async{
 
-    print('cancelo: ${result.cancelo}');
-    print('manual: ${result.manual}');
-
     final busquedaBloc = BlocProvider.of<BusquedaBloc>(context);
     final mapaBloc = BlocProvider.of<MapaBloc>(context);
     final miUbicacionBloc = BlocProvider.of<MiUbicacionBloc>(context);

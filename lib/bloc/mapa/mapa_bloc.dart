@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart' show Colors, Offset;
+import 'package:mapas_app/helpers/helpers.dart';
 import 'package:mapas_app/themes/uber_map_theme.dart';
 import 'package:meta/meta.dart';
 
@@ -125,10 +126,15 @@ class MapaBloc extends Bloc<MapaEvent, MapaState> {
     final currentPolylines = state.polylines;
     currentPolylines['mi_ruta_destino'] = this._miRutaDestino;
 
+    // Icono inicio
+    final iconInicio = await getAssetImageMarker();
+    final iconFinal = await getNetworkImageMarker();
+
     // Marcadores
     final markerInicio = new Marker(
       markerId: MarkerId('inicio'),
       position: event.rutaCoordenadas[0],
+      icon: iconInicio,
       infoWindow: InfoWindow(  
         title: 'Mi Ubicacion',
         snippet: 'Duracion recorrido ${ (event.duracion / 60).floor() } minutos',
@@ -142,6 +148,7 @@ class MapaBloc extends Bloc<MapaEvent, MapaState> {
     final markerFinal = new Marker(
       markerId: MarkerId('final'),
       position: event.rutaCoordenadas[event.rutaCoordenadas.length - 1],
+      icon: iconFinal,
       infoWindow: InfoWindow(  
         title: event.nombreDestino,
         snippet: 'Distancia $kilometros Km',
@@ -155,7 +162,7 @@ class MapaBloc extends Bloc<MapaEvent, MapaState> {
     Future.delayed(Duration(milliseconds: 300)).then(
       (value) => {
         // _mapController.showMarkerInfoWindow(MarkerId('inicio'))
-        _mapController.showMarkerInfoWindow(MarkerId('destino'))
+        // _mapController.showMarkerInfoWindow(MarkerId('final'))
       }
     );
 
