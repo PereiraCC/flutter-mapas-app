@@ -127,11 +127,14 @@ class MapaBloc extends Bloc<MapaEvent, MapaState> {
     currentPolylines['mi_ruta_destino'] = this._miRutaDestino;
 
     // Icono inicio
-    final iconInicio = await getAssetImageMarker();
+    final iconInicio = await getMarkerInicioIcon( event.duracion.toInt());
+    // final iconInicio = await getAssetImageMarker();
+
     final iconFinal = await getNetworkImageMarker();
 
     // Marcadores
     final markerInicio = new Marker(
+      anchor: Offset(0.0, 1.0),
       markerId: MarkerId('inicio'),
       position: event.rutaCoordenadas[0],
       icon: iconInicio,
